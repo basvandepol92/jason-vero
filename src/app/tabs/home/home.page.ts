@@ -63,8 +63,8 @@ export class HomePage implements OnInit, OnDestroy {
     // Effect to start countdown when settings are loaded
     effect(() => {
       const settings = this.appConfig.settings();
-      if (settings?.festival_start_date) {
-        this.startCountdown(settings.festival_start_date);
+      if (settings?.event_date) {
+        this.startCountdown(settings.event_date);
       }
     });
   }

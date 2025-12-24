@@ -19,7 +19,7 @@ export class DirectusService {
         show_map: true,
         show_feed: true,
         show_info: true,
-        festival_name: 'Jason & Vero 12.5 Fest'
+        event_name: 'Jason & Vero 12.5 Fest'
       };
     }
   }

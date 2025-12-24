@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { createDirectus, rest, authentication, login, readCollections, createCollection, updateCollection, createItem, readPermissions, createPermission, readRoles, readFieldsByCollection, createField, updateField, createRelation, readRelations } = require('@directus/sdk');
 
-const DIRECTUS_URL = 'process.env.DIRECTUS_URL' || 'http://localhost:8055';
+const DIRECTUS_URL = process.env.DIRECTUS_URL || 'http://localhost:8055';
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 

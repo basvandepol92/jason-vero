@@ -3,8 +3,8 @@ export interface AppSettings {
     show_map: boolean;
     show_feed: boolean;
     show_info: boolean;
-    festival_name?: string;
-    festival_start_date?: string; // ISO 8601
+    event_name?: string;
+    event_date?: string; // ISO 8601
 }
 
 export interface NewsItem {
