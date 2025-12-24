@@ -35,11 +35,7 @@
                 "output": "assets"
               },
               "src/manifest.webmanifest",
-              {
-                "glob": "OneSignalSDKWorker.js",
-                "input": "src",
-                "output": "/"
-              }
+              "src/OneSignalSDKWorker.js"
             ],
             "styles": [
               "src/global.scss",
