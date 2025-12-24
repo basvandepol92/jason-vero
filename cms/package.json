@@ -1,0 +1,12 @@
+{
+    "name": "fest-cms-setup",
+    "version": "1.0.0",
+    "description": "Directus setup script for Jason & Vero 12.5 Fest",
+    "main": "setup-directus.js",
+    "scripts": {
+        "setup": "node setup-directus.js"
+    },
+    "dependencies": {
+        "@directus/sdk": "^11.0.0"
+    }
+}

@@ -1,0 +1,37 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" href="/tabs/home">
+      <ion-icon aria-hidden="true" name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    @if (appConfig.settings().show_feed) {
+    <ion-tab-button tab="feed" href="/tabs/feed">
+      <ion-icon aria-hidden="true" name="newspaper"></ion-icon>
+      <ion-label>Feed</ion-label>
+    </ion-tab-button>
+    }
+
+    @if (appConfig.settings().show_schedule) {
+    <ion-tab-button tab="schedule" href="/tabs/schedule">
+      <ion-icon aria-hidden="true" name="calendar"></ion-icon>
+      <ion-label>Schedule</ion-label>
+    </ion-tab-button>
+    }
+
+    @if (appConfig.settings().show_map) {
+    <ion-tab-button tab="map" href="/tabs/map">
+      <ion-icon aria-hidden="true" name="map"></ion-icon>
+      <ion-label>Map</ion-label>
+    </ion-tab-button>
+    }
+
+    @if (appConfig.settings().show_info) {
+    <ion-tab-button tab="info" href="/tabs/info">
+      <ion-icon aria-hidden="true" name="information-circle"></ion-icon>
+      <ion-label>Info</ion-label>
+    </ion-tab-button>
+    }
+
+  </ion-tab-bar>
+</ion-tabs>

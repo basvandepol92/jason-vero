@@ -1,0 +1,270 @@
+.info-container {
+    padding-bottom: 60px;
+}
+
+.custom-accordion-group {
+    background: transparent;
+
+    ion-accordion {
+        margin-bottom: 16px;
+        border-radius: 24px;
+        background: rgba(42, 27, 36, 0.4); // Glassmorphism base
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &.accordion-expanded {
+            background: rgba(42, 27, 36, 0.8);
+            border-color: rgba(var(--ion-color-primary-rgb), 0.3);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        ion-item {
+            --background: transparent;
+            --padding-start: 16px;
+            --inner-padding-end: 16px;
+            --min-height: 80px;
+            --border-style: none;
+
+            h2 {
+                font-weight: 800;
+                font-size: 18px;
+                letter-spacing: -0.5px;
+                color: white;
+                margin: 0;
+            }
+        }
+
+        .category-icon {
+            font-size: 26px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            margin-right: 16px;
+            color: var(--ion-color-primary);
+        }
+
+        // Specific category colors for icons
+        &[value="transport"] .category-icon {
+            color: #50c8ff;
+            background: rgba(80, 200, 255, 0.1);
+        }
+
+        &[value="rules"] .category-icon {
+            color: #ff5050;
+            background: rgba(255, 80, 80, 0.1);
+        }
+
+        &[value="faq"] .category-icon {
+            color: #50ffab;
+            background: rgba(80, 255, 171, 0.1);
+        }
+
+        &[value="contact"] .category-icon {
+            color: #ffbd50;
+            background: rgba(255, 189, 80, 0.1);
+        }
+
+        .accordion-content {
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+            .info-item {
+                margin-bottom: 28px;
+                padding: 4px 0;
+
+                &:last-child {
+                    margin-bottom: 8px;
+                }
+
+                h3 {
+                    font-size: 16px;
+                    font-weight: 800;
+                    margin: 0 0 10px;
+                    color: var(--ion-color-secondary);
+                    display: flex;
+                    align-items: center;
+
+                    &::before {
+                        content: '';
+                        width: 4px;
+                        height: 16px;
+                        background: var(--ion-color-primary);
+                        margin-right: 12px;
+                        border-radius: 2px;
+                    }
+                }
+
+                .rich-content {
+                    font-size: 14.5px;
+                    line-height: 1.7;
+                    color: rgba(255, 255, 255, 0.85);
+                    padding-left: 16px;
+
+                    p {
+                        margin: 0 0 14px;
+                    }
+
+                    strong {
+                        color: white;
+                        font-weight: 700;
+                    }
+
+                    a {
+                        color: var(--ion-color-primary);
+                        text-decoration: none;
+                        font-weight: 600;
+                        border-bottom: 1px dashed rgba(var(--ion-color-primary-rgb), 0.4);
+                    }
+
+                    ul,
+                    ol {
+                        padding-left: 20px;
+                        margin-bottom: 16px;
+
+                        li {
+                            margin-bottom: 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.notification-section {
+    margin-top: 32px;
+    padding: 0 4px;
+
+    .glass-card {
+        margin: 0;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        .content {
+            padding: 32px 24px;
+
+            .notif-icon {
+                font-size: 40px;
+                color: var(--ion-color-secondary);
+                margin-bottom: 16px;
+                filter: drop-shadow(0 0 8px rgba(var(--ion-color-secondary-rgb), 0.3));
+            }
+
+            h3 {
+                margin: 0 0 8px;
+                font-weight: 800;
+                font-size: 20px;
+            }
+
+            p {
+                margin: 0 0 24px;
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            .notif-btn {
+                --border-radius: 16px;
+                font-weight: 700;
+                height: 54px;
+                --background: var(--ion-color-primary);
+                --box-shadow: 0 8px 16px rgba(var(--ion-color-primary-rgb), 0.3);
+            }
+
+            .subscribed-badge {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                background: rgba(45, 211, 111, 0.1);
+                padding: 12px;
+                border-radius: 16px;
+                border: 1px solid rgba(45, 211, 111, 0.2);
+
+                ion-icon {
+                    font-size: 20px;
+                    color: var(--ion-color-success);
+                }
+
+                ion-text {
+                    font-weight: 700;
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
+
+.emergency-section {
+    margin-top: 48px;
+    padding: 0 4px;
+
+    .emergency-card {
+        margin: 0;
+        background: linear-gradient(135deg, #2a1b24 0%, #3e1a1a 100%);
+        border-radius: 28px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 50, 50, 0.25);
+        box-shadow: 0 15px 35px rgba(255, 0, 0, 0.15);
+
+        .card-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 120%, rgba(255, 0, 0, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .content {
+            padding: 32px 24px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+
+            ion-icon {
+                font-size: 48px;
+                color: #ff3e3e;
+                margin-bottom: 16px;
+                filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.4));
+            }
+
+            h3 {
+                margin: 0 0 8px;
+                font-weight: 900;
+                font-size: 22px;
+                letter-spacing: -0.5px;
+                color: white;
+            }
+
+            p {
+                margin: 0 0 24px;
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 15px;
+                line-height: 1.5;
+            }
+
+            ion-button {
+                --border-radius: 20px;
+                font-weight: 800;
+                height: 58px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                --box-shadow: 0 10px 25px rgba(255, 62, 62, 0.4);
+            }
+        }
+    }
+}
+
+.loading-state {
+    ion-accordion {
+        opacity: 0.5;
+    }
+}

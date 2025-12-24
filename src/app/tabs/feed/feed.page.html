@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>The Scoop</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">The Scoop</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  @if (isLoading()) {
+  @for (i of [1,2,3]; track i) {
+  <ion-card>
+    <ion-skeleton-text animated style="width: 100%; height: 180px;"></ion-skeleton-text>
+    <ion-card-header>
+      <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-skeleton-text animated style="width: 100%;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+    </ion-card-content>
+  </ion-card>
+  }
+  } @else {
+  @for (item of sortedNews(); track item.id) {
+  <ion-card [class.pinned]="item.is_pinned">
+    @if (item.image) {
+    <img [src]="item.image | directusImg:'width=600'" alt="News Image" />
+    }
+
+    <ion-card-header>
+      <div class="meta-row">
+        @if (item.is_pinned) {
+        <div class="pinned-badge">
+          <ion-icon name="pin"></ion-icon> PINNED
+        </div>
+        }
+        <div class="date-badge">
+          <ion-icon name="time-outline"></ion-icon>
+          {{ item.date_created | date:'MMM d, HH:mm' }}
+        </div>
+      </div>
+
+      <ion-card-title>{{ item.title }}</ion-card-title>
+      @if (item.subtitle) {
+      <ion-card-subtitle>{{ item.subtitle }}</ion-card-subtitle>
+      }
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Using innerHTML carefully, directus content might be HTML -->
+      <div [innerHTML]="item.content"></div>
+    </ion-card-content>
+  </ion-card>
+  } @empty {
+  <div class="empty-state">
+    <p>No news yet! Stay tuned.</p>
+  </div>
+  }
+  }
+
+</ion-content>

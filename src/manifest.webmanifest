@@ -1,0 +1,17 @@
+{
+    "name": "Jason & Vero 12.5 Fest",
+    "short_name": "J&V 12.5",
+    "theme_color": "#ff2e63",
+    "background_color": "#1a0b14",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "assets/icon/favicon.png",
+            "sizes": "64x64",
+            "type": "image/png"
+        }
+    ],
+    "gcm_sender_id": "482941778795"
+}

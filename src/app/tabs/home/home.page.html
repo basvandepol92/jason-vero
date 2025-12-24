@@ -1,0 +1,124 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div class="header-section">
+    <h1>{{ appConfig.settings().festival_name || 'Jason & Vero Fest' }}</h1>
+    <!-- Notification/Profile icon placeholders could go here -->
+  </div>
+
+  <!-- Hero Section: Countdown -->
+  <ion-card class="hero-card">
+    <div class="hero-content">
+      <div class="badge-container">
+        <span class="badge">Copper Anniversary</span>
+      </div>
+
+      <h2>12.5 Years of Pure Magic</h2>
+      <p>Join us for a weekend of music, memories, and madness.</p>
+
+      @if (!isFestivalStarted()) {
+      <div class="countdown-grid">
+        <div class="countdown-item">
+          <span class="value">{{ days() | number:'2.0' }}</span>
+          <span class="label">DAYS</span>
+        </div>
+        <div class="countdown-item">
+          <span class="value">{{ hours() | number:'2.0' }}</span>
+          <span class="label">HRS</span>
+        </div>
+        <div class="countdown-item">
+          <span class="value">{{ minutes() | number:'2.0' }}</span>
+          <span class="label">MIN</span>
+        </div>
+        <div class="countdown-item">
+          <span class="value">{{ seconds() | number:'2.0' }}</span>
+          <span class="label">SEC</span>
+        </div>
+      </div>
+      } @else {
+      <div class="festival-live">
+        <h3>🎉 IT'S PARTY TIME! 🎉</h3>
+      </div>
+      }
+    </div>
+  </ion-card>
+
+  <!-- Navigation Grid -->
+  <ion-grid class="nav-grid">
+    <ion-row>
+      <ion-col size="6">
+        <ion-card class="nav-card" [routerLink]="['/tabs/schedule']">
+          <ion-icon name="ticket" color="primary"></ion-icon>
+          <h3>Lineup</h3>
+          <p>Main Stage & More</p>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="nav-card" [routerLink]="['/tabs/map']">
+          <ion-icon name="map" color="secondary"></ion-icon>
+          <h3>Map</h3>
+          <p>Find your way</p>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card class="nav-card" [routerLink]="['/tabs/feed']">
+          <ion-icon name="globe" color="warning"></ion-icon>
+          <h3>The Scoop</h3>
+          <p>Daily Updates</p>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="nav-card" [routerLink]="['/tabs/info']">
+          <ion-icon name="information-circle" color="tertiary"></ion-icon>
+          <h3>Info Hub</h3>
+          <p>FAQ & Safety</p>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Happening Now -->
+  <div class="section-title">
+    <h3>Happening Now</h3>
+    <ion-button fill="clear" size="small" [routerLink]="['/tabs/schedule']">View All</ion-button>
+  </div>
+
+  @if (isLoadingHappeningNow()) {
+  <ion-card class="happening-card">
+    <ion-skeleton-text animated style="width: 100%; height: 160px;"></ion-skeleton-text>
+  </ion-card>
+  } @else if (happeningNow(); as item) {
+  <ion-card class="happening-card shadow-lg" [class.is-live]="isLive()">
+    <div class="happening-image-container" *ngIf="item.image">
+      <img [src]="item.image | directusImg:'width=600'" alt="{{ item.title }}">
+      <div class="image-overlay"></div>
+    </div>
+
+    <div class="happening-content">
+      <div class="live-indicator" [class.upcoming]="!isLive()">
+        <div class="dot" *ngIf="isLive()"></div>
+        {{ isLive() ? 'LIVE NOW' : 'UP NEXT' }}
+      </div>
+      <h2>{{ item.title }}</h2>
+      <p class="time">
+        <ion-icon name="time-outline"></ion-icon>
+        {{ item.start_time | date:'shortTime' }} - {{ item.end_time | date:'shortTime' }}
+      </p>
+      @if (item.location) {
+      <p class="location">
+        <ion-icon name="location-outline"></ion-icon>
+        {{ item.location }}
+      </p>
+      }
+    </div>
+  </ion-card>
+  } @else {
+  <ion-card class="info-card">
+    <ion-card-content>
+      Nothing scheduled right now. Check back soon!
+    </ion-card-content>
+  </ion-card>
+  }
+
+</ion-content>

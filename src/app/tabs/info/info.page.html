@@ -1,0 +1,96 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Festival Info</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Festival Info</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="info-container">
+    @if (isLoading()) {
+    <div class="loading-state">
+      <ion-accordion-group>
+        @for (i of [1,2,3]; track i) {
+        <ion-accordion>
+          <ion-item slot="header">
+            <ion-label>Laden...</ion-label>
+          </ion-item>
+        </ion-accordion>
+        }
+      </ion-accordion-group>
+    </div>
+    } @else {
+    <ion-accordion-group [multiple]="true" class="custom-accordion-group">
+      @for (cat of categories(); track cat) {
+      <ion-accordion [value]="cat">
+        <ion-item slot="header">
+          <ion-icon [name]="categoryLabels[cat]?.icon || 'alert-circle-outline'" slot="start"
+            class="category-icon"></ion-icon>
+          <ion-label>
+            <h2>{{ categoryLabels[cat]?.label || cat | titlecase }}</h2>
+          </ion-label>
+        </ion-item>
+
+        <div class="ion-padding accordion-content" slot="content">
+          <ion-list lines="none">
+            @for (item of groupedInfo()[cat]; track item.id) {
+            <div class="info-item">
+              <h3>{{ item.title }}</h3>
+              <div [innerHTML]="item.content" class="rich-content"></div>
+            </div>
+            }
+          </ion-list>
+        </div>
+      </ion-accordion>
+      } @empty {
+      <div class="empty-state">
+        <p>Geen informatie beschikbaar op dit moment.</p>
+      </div>
+      }
+    </ion-accordion-group>
+    }
+
+    <!-- Notifications Section -->
+    <div class="notification-section">
+      <ion-card class="glass-card">
+        <div class="content ion-text-center">
+          <ion-icon name="notifications-outline" class="notif-icon"></ion-icon>
+          <h3>Blijf op de hoogte!</h3>
+          <p>Ontvang meldingen over programma-wijzigingen en belangrijk nieuws.</p>
+
+          @if (!notificationService.isSubscribed()) {
+          <ion-button expand="block" (click)="requestNotifications()" class="notif-btn">
+            🔔 Zet meldingen aan
+          </ion-button>
+          } @else {
+          <div class="subscribed-badge">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <ion-text color="success">Meldingen staan aan</ion-text>
+          </div>
+          }
+        </div>
+      </ion-card>
+    </div>
+
+    <!-- Emergency Button Section -->
+    <div class="emergency-section">
+      <ion-card class="emergency-card">
+        <div class="card-glow"></div>
+        <div class="content">
+          <ion-icon name="call-outline"></ion-icon>
+          <h3>Noodgeval?</h3>
+          <p>Bel 112 of ga naar de EHBO post.</p>
+          <ion-button expand="block" color="danger" (click)="callEmergency()">
+            NOODGEVAL / EHBO
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,37 @@
+<div class="timeline-row" (click)="clicked.emit()">
+
+  <!-- Left Column: Icon & Line -->
+  <div class="timeline-left">
+    <div class="icon-bubble" [class.live]="isLive">
+      <ion-icon [name]="item.icon_type | scheduleIcon"></ion-icon>
+    </div>
+    @if (!isLast) {
+    <div class="vertical-line" [class.live]="isLive"></div>
+    }
+  </div>
+
+  <!-- Right Column: Content Card -->
+  <div class="timeline-right">
+    <div class="card-container" [class.live]="isLive">
+      <div class="time-badge">{{ item.start_time | date:'shortTime' }}</div>
+
+      <div class="card-content">
+        <div class="header">
+          <h3>{{ item.title }}</h3>
+          <span class="type-badge">{{ getBadgeLabel(item.icon_type) }}</span>
+        </div>
+
+        <div class="location">
+          <ion-icon name="location-outline"></ion-icon> {{ item.location }}
+        </div>
+      </div>
+
+      @if (isLive) {
+      <div class="live-tag">LIVE</div>
+      }
+
+      <ion-icon name="heart" class="action-icon" color="danger"></ion-icon>
+    </div>
+  </div>
+
+</div>

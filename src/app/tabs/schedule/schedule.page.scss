@@ -1,0 +1,151 @@
+ion-toolbar {
+    --background: var(--ion-background-color);
+    --border-color: transparent;
+}
+
+.segment-toolbar {
+    padding-bottom: 8px;
+}
+
+ion-segment {
+    background: transparent;
+    width: 100%;
+    justify-content: space-around;
+
+    ion-segment-button {
+        --indicator-color: var(--ion-color-primary);
+        --indicator-height: 4px;
+        --color: rgba(255, 255, 255, 0.4);
+        --color-checked: #ffffff;
+        --background-checked: transparent;
+        min-width: 80px;
+
+        &::part(indicator-background) {
+            border-radius: 4px 4px 0 0;
+            box-shadow: 0 -4px 10px rgba(255, 46, 99, 0.5);
+        }
+
+        ion-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            margin: 8px 0;
+
+            .day-label {
+                font-size: 10px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .date-label {
+                font-size: 20px;
+                font-weight: 800;
+            }
+        }
+    }
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    h2 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 24px;
+    }
+}
+
+.timeline-container {
+    padding-bottom: 80px; // Space for FAB
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--ion-color-medium);
+}
+
+.map-fab {
+    --background: var(--ion-color-primary);
+    --color: white;
+    --border-radius: 24px;
+    width: auto;
+    padding-right: 16px;
+    overflow: visible;
+
+    &::part(native) {
+        width: auto;
+        padding: 0 16px;
+        border-radius: 24px;
+    }
+
+    ion-icon {
+        margin-right: 8px;
+    }
+
+    .fab-label {
+        font-weight: 700;
+    }
+}
+
+// Modal Styles
+.modal-content {
+    .event-image {
+        width: calc(100% + 32px);
+        margin: -16px -16px 24px -16px;
+        height: 250px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    h2 {
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 16px;
+        color: white;
+    }
+
+    .meta-info {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 16px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+
+        p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+    }
+
+    .description {
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 24px;
+    }
+
+    .artist-section {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 16px;
+
+        h3 {
+            color: var(--ion-color-medium);
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
+}

@@ -1,0 +1,77 @@
+<ion-header class="map-header">
+  <div class="filter-container">
+    <ion-button shape="round" size="small" [color]="selectedFilter() === 'all' ? 'primary' : 'medium'"
+      (click)="setFilter('all')">
+      All
+    </ion-button>
+    <ion-button shape="round" size="small" [color]="selectedFilter() === 'stage' ? 'primary' : 'medium'"
+      (click)="setFilter('stage')">
+      <ion-icon name="musical-notes" slot="start"></ion-icon>
+      Stages
+    </ion-button>
+    <ion-button shape="round" size="small" [color]="selectedFilter() === 'food' ? 'primary' : 'medium'"
+      (click)="setFilter('food')">
+      <ion-icon name="restaurant" slot="start"></ion-icon>
+      Food
+    </ion-button>
+    <ion-button shape="round" size="small" [color]="selectedFilter() === 'toilet' ? 'primary' : 'medium'"
+      (click)="setFilter('toilet')">
+      <ion-icon name="body" slot="start"></ion-icon>
+      Toilets
+    </ion-button>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true" [scrollY]="false">
+  <div id="map"></div>
+
+  <!-- Map Bottom Sheet (Ionic Modal) -->
+  <ion-modal [isOpen]="!!selectedLocation()" (didDismiss)="selectedLocation.set(null)" [initialBreakpoint]="0.5"
+    [breakpoints]="[0, 0.5, 0.9]" handleBehavior="cycle" class="map-modal">
+    <ng-template>
+      <div class="sheet-content">
+        @if (selectedLocation(); as loc) {
+        <div class="loc-image-container">
+          @if (loc.image) {
+          <img [src]="loc.image | directusImg:'width=500'" alt="Location Image">
+          } @else {
+          <div class="placeholder-img">
+            <ion-icon name="map"></ion-icon>
+          </div>
+          }
+        </div>
+
+        <div class="loc-details">
+          <h2>{{ loc.name }}</h2>
+          <div class="badges">
+            <span class="status-badge" *ngIf="false">HAPPENING NOW</span>
+            <span class="type-badge">{{ loc.type | titlecase }}</span>
+          </div>
+
+          <p>{{ loc.description || 'Welcome to ' + loc.name }}</p>
+
+          @if (loc.type === 'stage') {
+          <div class="coming-up">
+            <h4>COMING UP</h4>
+            <div class="next-event">
+              <span class="time">20:30</span>
+              <span class="event-title">First Dance Re-enactment</span>
+            </div>
+          </div>
+          }
+
+          <div class="actions">
+            <ion-button class="direction-btn" expand="block" (click)="getDirections()">
+              <ion-icon name="navigate" slot="start"></ion-icon>
+              Get Directions
+            </ion-button>
+            <ion-button fill="outline" shape="round">
+              <ion-icon name="share-social" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+        }
+      </div>
+    </ng-template>
+  </ion-modal>
+</ion-content>
