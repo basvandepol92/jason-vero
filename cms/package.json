@@ -7,6 +7,7 @@
         "setup": "node setup-directus.js"
     },
     "dependencies": {
-        "@directus/sdk": "^11.0.0"
+        "@directus/sdk": "^11.0.3",
+        "dotenv": "^17.2.3"
     }
 }
