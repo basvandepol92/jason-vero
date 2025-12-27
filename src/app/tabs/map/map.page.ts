@@ -1,15 +1,14 @@
 import { Component, OnInit, signal, computed, inject, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonButton, IonIcon, IonModal } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonButton, IonIcon, IonModal, ViewDidEnter } from '@ionic/angular/standalone';
 import { MapService } from '../../core/services/map.service';
 import { LocationItem } from '../../models/app.models';
 import { addIcons } from 'ionicons';
-import { navigate, search, close, musicalNotes, restaurant, body as wc, star, podium, shareSocial } from 'ionicons/icons';
+import { search, close, musicalNotes, restaurant, body as wc, star, podium } from 'ionicons/icons';
 import * as L from 'leaflet';
 import { DirectusImgPipe } from '../../shared/pipes/directus-img.pipe';
 import { take } from 'rxjs';
-import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-map',
@@ -29,7 +28,7 @@ import { TitleCasePipe } from '@angular/common';
   ],
   encapsulation: ViewEncapsulation.None // Needed for Leaflet styles
 })
-export class MapPage implements OnInit, OnDestroy {
+export class MapPage implements OnInit, OnDestroy, ViewDidEnter {
   private mapService = inject(MapService);
 
   private map: L.Map | undefined;
@@ -42,12 +41,30 @@ export class MapPage implements OnInit, OnDestroy {
   public selectedLocation = signal<LocationItem | null>(null);
 
   constructor() {
-    addIcons({ navigate, search, close, 'musical-notes': musicalNotes, restaurant, wc, star, podium, 'share-social': shareSocial });
+    addIcons({ search, close, 'musical-notes': musicalNotes, restaurant, wc, star, podium });
   }
 
   ngOnInit() {
     this.initMap();
     this.loadLocations();
+  }
+
+  ionViewDidEnter() {
+    if (this.map) {
+      this.map.invalidateSize();
+      this.fitMapToHeight();
+    }
+  }
+
+  private fitMapToHeight() {
+    if (!this.map) return;
+    const mapWidth = 1000;
+    const mapHeight = 523.33;
+    const bounds = L.latLngBounds([0, 0], [mapHeight, mapWidth]);
+
+    // To fill height, we use getBoundsZoom with false (outside/cover)
+    const fillZoom = this.map.getBoundsZoom(bounds, false);
+    this.map.setView(bounds.getCenter(), fillZoom);
   }
 
   ngOnDestroy() {
@@ -57,46 +74,39 @@ export class MapPage implements OnInit, OnDestroy {
   }
 
   initMap() {
-    // 1. Define Map Bounds for 1200x628 image (Aspect Ratio 1.91)
-    // We keep width 1000 for easy percentage mapping, so height = 1000 * (628/1200) = 523.33
     const mapWidth = 1000;
     const mapHeight = 523.33;
     const bounds: L.LatLngBoundsExpression = [[0, 0], [mapHeight, mapWidth]];
 
-    // 2. Initialize Map with CRS.Simple
     this.map = L.map('map', {
       crs: L.CRS.Simple,
       minZoom: -1,
       maxZoom: 3,
       zoomSnap: 0.1,
       attributionControl: false,
-      zoomControl: false, // We add it manually to control position
+      zoomControl: false,
       maxBounds: bounds,
       maxBoundsViscosity: 1.0
     });
 
     L.control.zoom({ position: 'bottomright' }).addTo(this.map);
 
-    // 3. Add Image Overlay
     const imageUrl = 'assets/map.jpg';
     L.imageOverlay(imageUrl, bounds).addTo(this.map);
 
-    // 4. Fit bounds
-    this.map.fitBounds(bounds);
+    // Initial view
+    this.map.setView(bounds.getCenter(), 1);
 
-    // 5. Setup Marker Layer
     this.markersLayer = L.layerGroup().addTo(this.map);
 
-    // Deselect on map click
     this.map.on('click', () => {
       this.selectedLocation.set(null);
     });
 
-    // Handle view initialization
     setTimeout(() => {
       this.map?.invalidateSize();
-      this.map?.fitBounds(bounds);
-    }, 200);
+      this.fitMapToHeight();
+    }, 500);
   }
 
   loadLocations() {
@@ -115,16 +125,11 @@ export class MapPage implements OnInit, OnDestroy {
     this.selectedLocation.set(null);
   }
 
-  /**
-   * Translates Directus percentage coordinates (0-100) to Leaflet CRS.Simple.
-   * Directus: [0,0] is Top-Left.
-   * Leaflet CRS.Simple: [0,0] is Bottom-Left.
-   */
   private convertCoords(xPerc: number, yPerc: number): L.LatLng {
     const mapWidth = 1000;
     const mapHeight = 523.33;
 
-    const lat = mapHeight - (yPerc * mapHeight / 100); // Invert Y
+    const lat = mapHeight - (yPerc * mapHeight / 100);
     const lng = xPerc * mapWidth / 100;
     return L.latLng(lat, lng);
   }
@@ -142,7 +147,6 @@ export class MapPage implements OnInit, OnDestroy {
 
     items.forEach(loc => {
       if (loc.coord_x === undefined || loc.coord_y === undefined || loc.coord_x === null || loc.coord_y === null) {
-        console.warn(`Location ${loc.name} (ID: ${loc.id}) is missing coordinates. Skipping.`);
         return;
       }
 
@@ -182,9 +186,5 @@ export class MapPage implements OnInit, OnDestroy {
     return `<div class="marker-bubble ${className}">
                 <ion-icon name="${iconName}"></ion-icon>
               </div>`;
-  }
-
-  getDirections() {
-    console.log('Get directions to', this.selectedLocation()?.name);
   }
 }

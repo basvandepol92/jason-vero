@@ -36,12 +36,7 @@
     }
   </div>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button class="map-fab" [routerLink]="['/tabs/map']">
-      <ion-icon name="map"></ion-icon>
-      <span class="fab-label">View Map</span>
-    </ion-fab-button>
-  </ion-fab>
+
 
   <ion-modal [isOpen]="isModalOpen()" (didDismiss)="closeModal()">
     <ng-template>

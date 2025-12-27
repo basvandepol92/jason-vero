@@ -60,7 +60,7 @@ ion-segment {
 }
 
 .timeline-container {
-    padding-bottom: 80px; // Space for FAB
+    padding-bottom: 24px;
 }
 
 .empty-state {
@@ -69,28 +69,7 @@ ion-segment {
     color: var(--ion-color-medium);
 }
 
-.map-fab {
-    --background: var(--ion-color-primary);
-    --color: white;
-    --border-radius: 24px;
-    width: auto;
-    padding-right: 16px;
-    overflow: visible;
 
-    &::part(native) {
-        width: auto;
-        padding: 0 16px;
-        border-radius: 24px;
-    }
-
-    ion-icon {
-        margin-right: 8px;
-    }
-
-    .fab-label {
-        font-weight: 700;
-    }
-}
 
 // Modal Styles
 .modal-content {

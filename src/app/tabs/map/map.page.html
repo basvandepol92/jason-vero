@@ -50,25 +50,9 @@
 
           <p>{{ loc.description || 'Welcome to ' + loc.name }}</p>
 
-          @if (loc.type === 'stage') {
-          <div class="coming-up">
-            <h4>COMING UP</h4>
-            <div class="next-event">
-              <span class="time">20:30</span>
-              <span class="event-title">First Dance Re-enactment</span>
-            </div>
-          </div>
-          }
 
-          <div class="actions">
-            <ion-button class="direction-btn" expand="block" (click)="getDirections()">
-              <ion-icon name="navigate" slot="start"></ion-icon>
-              Get Directions
-            </ion-button>
-            <ion-button fill="outline" shape="round">
-              <ion-icon name="share-social" slot="icon-only"></ion-icon>
-            </ion-button>
-          </div>
+
+
         </div>
         }
       </div>
