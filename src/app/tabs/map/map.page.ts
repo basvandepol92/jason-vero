@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonButton, IonIcon, IonModal, ViewDidEnter } fro
 import { MapService } from '../../core/services/map.service';
 import { LocationItem } from '../../models/app.models';
 import { addIcons } from 'ionicons';
-import { search, close, musicalNotes, restaurant, body as wc, star, podium } from 'ionicons/icons';
+import { search, close, musicalNotes, restaurant, body, star, podium } from 'ionicons/icons';
 import * as L from 'leaflet';
 import { DirectusImgPipe } from '../../shared/pipes/directus-img.pipe';
 import { take } from 'rxjs';
@@ -41,7 +41,7 @@ export class MapPage implements OnInit, OnDestroy, ViewDidEnter {
   public selectedLocation = signal<LocationItem | null>(null);
 
   constructor() {
-    addIcons({ search, close, 'musical-notes': musicalNotes, restaurant, body: wc, star, podium });
+    addIcons({ search, close, 'musical-notes': musicalNotes, restaurant, body, star, podium });
   }
 
   ngOnInit() {
@@ -179,7 +179,7 @@ export class MapPage implements OnInit, OnDestroy, ViewDidEnter {
     switch (type) {
       case 'stage': iconName = 'musical-notes'; className = 'stage'; break;
       case 'food': iconName = 'restaurant'; className = 'food'; break;
-      case 'toilet': iconName = 'wc'; className = 'toilet'; break;
+      case 'toilet': iconName = 'body'; className = 'toilet'; break;
       case 'entrance': iconName = 'podium'; className = 'entrance'; break;
     }
 
