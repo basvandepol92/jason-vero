@@ -43,6 +43,7 @@ describe('AppConfigService', () => {
   }));
 
   it('should keep defaults on error', fakeAsync(() => {
+    spyOn(console, 'error'); // Silence the expected error log
     mockDirectusService.getAppSettings.and.returnValue(Promise.reject('Error'));
 
     service.loadAppConfig();

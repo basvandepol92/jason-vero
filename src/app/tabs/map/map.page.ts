@@ -41,7 +41,7 @@ export class MapPage implements OnInit, OnDestroy, ViewDidEnter {
   public selectedLocation = signal<LocationItem | null>(null);
 
   constructor() {
-    addIcons({ search, close, 'musical-notes': musicalNotes, restaurant, wc, star, podium });
+    addIcons({ search, close, 'musical-notes': musicalNotes, restaurant, body: wc, star, podium });
   }
 
   ngOnInit() {
@@ -95,7 +95,7 @@ export class MapPage implements OnInit, OnDestroy, ViewDidEnter {
     L.imageOverlay(imageUrl, bounds).addTo(this.map);
 
     // Initial view
-    this.map.setView(bounds.getCenter(), 1);
+    this.map.setView(L.latLngBounds(bounds).getCenter(), 1);
 
     this.markersLayer = L.layerGroup().addTo(this.map);
 
