@@ -1,8 +1,10 @@
 <ion-content [fullscreen]="true" class="ion-padding">
 
   <div class="header-section">
+    @if (appConfig.settings().event_date; as date) {
+    <span class="date-label">{{ date | date:'MMM d, y' }}</span>
+    }
     <h1>{{ appConfig.settings().event_name || 'Jason & Vero Fest' }}</h1>
-    <!-- Notification/Profile icon placeholders could go here -->
   </div>
 
   <!-- Hero Section: Countdown -->
@@ -48,7 +50,7 @@
       <ion-col size="6">
         <ion-card class="nav-card" [routerLink]="['/tabs/schedule']">
           <ion-icon name="ticket" color="primary"></ion-icon>
-          <h3>Lineup</h3>
+          <h3>Schedule</h3>
           <p>Main Stage & More</p>
         </ion-card>
       </ion-col>
@@ -64,14 +66,14 @@
       <ion-col size="6">
         <ion-card class="nav-card" [routerLink]="['/tabs/feed']">
           <ion-icon name="globe" color="warning"></ion-icon>
-          <h3>The Scoop</h3>
+          <h3>Feed</h3>
           <p>Daily Updates</p>
         </ion-card>
       </ion-col>
       <ion-col size="6">
         <ion-card class="nav-card" [routerLink]="['/tabs/info']">
           <ion-icon name="information-circle" color="tertiary"></ion-icon>
-          <h3>Info Hub</h3>
+          <h3>Info</h3>
           <p>FAQ & Safety</p>
         </ion-card>
       </ion-col>
