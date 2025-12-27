@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
 import { DirectusService } from './directus.service';
 import { AppSettings } from '../models/app.models';
 
@@ -15,7 +15,9 @@ export class AppConfigService {
 
   public settings = computed(() => this._settings());
 
-  constructor(private directusService: DirectusService) { }
+  private directusService = inject(DirectusService);
+
+  constructor() { }
 
   async loadAppConfig(): Promise<void> {
     try {
