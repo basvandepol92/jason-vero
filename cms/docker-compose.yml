@@ -22,10 +22,6 @@ services:
 
   directus:
     image: directus/directus:latest
-    user: "root"  # We starten even als root om de rechten te kunnen wijzigen
-    command: >
-      sh -c "chown -R node:node /directus/uploads && 
-             su node -c 'npx directus start'"
     container_name: directus-app
     ports:
       - '8055:8055'
