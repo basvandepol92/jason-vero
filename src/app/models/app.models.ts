@@ -41,7 +41,7 @@ export interface LocationItem {
     coord_y: number; // 0-100
     description?: string;
     image?: string;
-    type: 'stage' | 'food' | 'toilet' | 'entrance' | 'other';
+    type: 'stage' | 'lodge' | 'toilets' | 'entrance' | 'other';
 }
 
 export interface InfoItem {

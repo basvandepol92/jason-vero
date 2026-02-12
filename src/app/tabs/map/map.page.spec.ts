@@ -24,11 +24,11 @@ describe('MapPage', () => {
     {
       id: 2,
       status: 'published',
-      name: 'Food Court',
+      name: 'Lodge',
       coord_x: 30,
       coord_y: 40,
-      type: 'food'
-    }
+      type: 'lodge'
+    } as any as LocationItem
   ];
 
   beforeEach(() => {
@@ -70,8 +70,8 @@ describe('MapPage', () => {
     fixture.detectChanges();
     tick();
 
-    component.setFilter('food');
-    expect(component.selectedFilter()).toBe('food');
+    component.setFilter('lodge');
+    expect(component.selectedFilter()).toBe('lodge');
     expect(component.selectedLocation()).toBeNull();
     // renderMarkers is called inside setFilter
     expect(component.renderMarkers).toHaveBeenCalledTimes(2); // Init + SetFilter

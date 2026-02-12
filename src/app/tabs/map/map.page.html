@@ -9,14 +9,14 @@
       <ion-icon name="musical-notes" slot="start"></ion-icon>
       Stages
     </ion-button>
-    <ion-button shape="round" size="small" [color]="selectedFilter() === 'food' ? 'primary' : 'medium'"
-      (click)="setFilter('food')">
-      <ion-icon name="restaurant" slot="start"></ion-icon>
-      Food
+    <ion-button shape="round" size="small" [color]="selectedFilter() === 'lodge' ? 'primary' : 'medium'"
+      (click)="setFilter('lodge')">
+      <ion-icon name="bed" slot="start"></ion-icon>
+      Lodge
     </ion-button>
-    <ion-button shape="round" size="small" [color]="selectedFilter() === 'toilet' ? 'primary' : 'medium'"
-      (click)="setFilter('toilet')">
-      <ion-icon name="body" slot="start"></ion-icon>
+    <ion-button shape="round" size="small" [color]="selectedFilter() === 'toilets' ? 'primary' : 'medium'"
+      (click)="setFilter('toilets')">
+      <ion-icon name="man" slot="start"></ion-icon>
       Toilets
     </ion-button>
   </div>
