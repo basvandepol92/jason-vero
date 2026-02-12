@@ -1,4 +1,4 @@
-import { APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER, inject } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
@@ -14,15 +14,12 @@ export function initializeApp(appConfig: AppConfigService) {
   return () => appConfig.loadAppConfig();
 }
 
-import { OneSignal } from 'onesignal-ngx';
-
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: APP_CONFIG, useValue: environment },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideHttpClient(),
     provideIonicAngular(),
-    OneSignal,
     provideRouter(routes, withPreloading(PreloadAllModules)),
     {
       provide: APP_INITIALIZER,
@@ -32,4 +29,3 @@ bootstrapApplication(AppComponent, {
     }
   ],
 });
-

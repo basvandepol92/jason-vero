@@ -3,7 +3,6 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { InfoPage } from './info.page';
 import { InfoService, GroupedInfo } from '../../core/services/info.service';
-import { NotificationService } from '../../core/services/notification.service';
 import { APP_CONFIG } from '../../core/config/app-config.token';
 import { InfoItem } from '../../models/app.models';
 import { of } from 'rxjs';
@@ -13,7 +12,6 @@ describe('InfoPage', () => {
   let component: InfoPage;
   let fixture: ComponentFixture<InfoPage>;
   let mockInfoService: jasmine.SpyObj<InfoService>;
-  let mockNotificationService: any;
 
   const mockInfoItems: InfoItem[] = [
     {
@@ -51,10 +49,6 @@ describe('InfoPage', () => {
     mockInfoService = jasmine.createSpyObj('InfoService', ['getGroupedInfo']);
     mockInfoService.getGroupedInfo.and.returnValue(of(mockGroupedInfo));
 
-    mockNotificationService = {
-      requestPermission: jasmine.createSpy('requestPermission'),
-      isSubscribed: signal(false)
-    };
 
     TestBed.configureTestingModule({
       imports: [InfoPage],
@@ -62,8 +56,7 @@ describe('InfoPage', () => {
         provideRouter([]),
         provideHttpClient(),
         { provide: APP_CONFIG, useValue: { apiUrl: 'http://localhost:8055' } },
-        { provide: InfoService, useValue: mockInfoService },
-        { provide: NotificationService, useValue: mockNotificationService }
+        { provide: InfoService, useValue: mockInfoService }
       ]
     });
 
@@ -85,10 +78,6 @@ describe('InfoPage', () => {
     expect(component.isLoading()).toBe(false);
   }));
 
-  it('should request notifications', () => {
-    component.requestNotifications();
-    expect(mockNotificationService.requestPermission).toHaveBeenCalled();
-  });
 
   // Emergency call uses ionic AlertController, which is hard to spy on unless we mock the controller itself.
   // But we can check if method exists and runs without error.

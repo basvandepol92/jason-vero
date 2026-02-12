@@ -9,7 +9,6 @@ This is the official mobile application for the **Jason & Vero 12.5 Year Anniver
 -   **Schedule**: Complete timeline of events, grouped by day. Status indicators for live events.
 -   **Map**: Interactive festival map using Leaflet, with custom markers for stages, food, and facilities.
 -   **Info**: Accordion-style information pages (Transport, Rules, FAQ) and emergency contact access.
--   **Notifications**: Push notifications via OneSignal for important alerts.
 -   **Offline Support**: PWA capabilities for reliable access during the festival.
 
 ## 🛠 Tech Stack
@@ -19,7 +18,6 @@ This is the official mobile application for the **Jason & Vero 12.5 Year Anniver
 -   **Backend / CMS**: [Directus 11](https://directus.io/) (Headless CMS)
 -   **Database**: PostgreSQL (via Directus)
 -   **Maps**: [Leaflet](https://leafletjs.com/)
--   **Notifications**: [OneSignal](https://onesignal.com/)
 -   **Testing**: Jasmine & Karma (Unit Tests)
 -   **Linting**: ESLint
 -   **CI/CD**: GitHub Actions

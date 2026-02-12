@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonButton, IonIcon, AlertController, IonList, IonCard, IonText } from '@ionic/angular/standalone';
 import { InfoService, GroupedInfo } from '../../core/services/info.service';
-import { NotificationService } from '../../core/services/notification.service';
 import { addIcons } from 'ionicons';
 import { callOutline, alertCircleOutline, carOutline, bookOutline, helpCircleOutline, personOutline, chevronDownOutline, notificationsOutline, checkmarkCircle } from 'ionicons/icons';
 
@@ -33,7 +32,6 @@ import { callOutline, alertCircleOutline, carOutline, bookOutline, helpCircleOut
 export class InfoPage implements OnInit {
   private infoService = inject(InfoService);
   private alertCtrl = inject(AlertController);
-  public notificationService = inject(NotificationService);
 
   public groupedInfo = signal<GroupedInfo>({});
   public isLoading = signal(true);
@@ -57,9 +55,7 @@ export class InfoPage implements OnInit {
       bookOutline,
       helpCircleOutline,
       personOutline,
-      'chevron-down-outline': chevronDownOutline,
-      notificationsOutline,
-      checkmarkCircle
+      'chevron-down-outline': chevronDownOutline
     });
   }
 
@@ -82,9 +78,6 @@ export class InfoPage implements OnInit {
     });
   }
 
-  requestNotifications() {
-    this.notificationService.requestPermission();
-  }
 
   async callEmergency() {
     const alert = await this.alertCtrl.create({

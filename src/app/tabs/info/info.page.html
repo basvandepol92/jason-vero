@@ -55,27 +55,6 @@
     </ion-accordion-group>
     }
 
-    <!-- Notifications Section -->
-    <div class="notification-section">
-      <ion-card class="glass-card">
-        <div class="content ion-text-center">
-          <ion-icon name="notifications-outline" class="notif-icon"></ion-icon>
-          <h3>Blijf op de hoogte!</h3>
-          <p>Ontvang meldingen over programma-wijzigingen en belangrijk nieuws.</p>
-
-          @if (!notificationService.isSubscribed()) {
-          <ion-button expand="block" (click)="requestNotifications()" class="notif-btn">
-            🔔 Zet meldingen aan
-          </ion-button>
-          } @else {
-          <div class="subscribed-badge">
-            <ion-icon name="checkmark-circle"></ion-icon>
-            <ion-text color="success">Meldingen staan aan</ion-text>
-          </div>
-          }
-        </div>
-      </ion-card>
-    </div>
 
     <!-- Emergency Button Section -->
     <div class="emergency-section">
