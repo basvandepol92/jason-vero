@@ -15,6 +15,8 @@ ion-content {
         letter-spacing: 1px;
         margin-bottom: 4px;
         text-transform: uppercase;
+        text-align: center;
+        width: 100%;
     }
 
     h1 {
@@ -25,13 +27,12 @@ ion-content {
     }
 }
 
-.hero-card {
+.countdown-card {
     margin: 0 0 24px 0;
     border-radius: 24px;
-    background: linear-gradient(135deg, rgba(255, 46, 99, 0.7), rgba(82, 96, 255, 0.5)), url('/assets/images/jasonvero.jpeg');
+    background: linear-gradient(135deg, rgba(255, 46, 99, 0.7), rgba(82, 96, 255, 0.5));
     background-size: cover;
     background-position: center;
-    min-height: 300px;
     display: flex;
     align-items: flex-end;
     position: relative;
@@ -48,6 +49,72 @@ ion-content {
         background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
         z-index: 1;
     }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 12px;
+        width: 100%;
+
+        .badge-container {
+            margin-bottom: 8px;
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 16px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+
+            .countdown-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .value {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: white;
+                }
+
+                .label {
+                    font-size: 10px;
+                    color: rgba(255, 255, 255, 0.6);
+                    margin-top: 2px;
+                }
+            }
+        }
+
+        .festival-live {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 16px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+
+            h3 {
+                color: var(--ion-color-success);
+                margin: 0;
+            }
+        }
+    }
+}
+
+.hero-card {
+    margin: 0 0 24px 0;
+    border-radius: 24px;
+    background: url('/assets/images/jasonvero.jpeg');
+    background-size: cover;
+    background-position: center;
+    min-height: 300px;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+    /*box-shadow: 0 10px 30px rgba(255, 46, 99, 0.3);*/
 
     .hero-content {
         position: relative;

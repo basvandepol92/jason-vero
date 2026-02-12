@@ -91,7 +91,7 @@ export class MapPage implements OnInit, OnDestroy, ViewDidEnter {
 
     L.control.zoom({ position: 'bottomright' }).addTo(this.map);
 
-    const imageUrl = 'assets/map.jpg';
+    const imageUrl = 'assets/map.png';
     L.imageOverlay(imageUrl, bounds).addTo(this.map);
 
     // Initial view
