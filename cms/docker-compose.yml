@@ -22,11 +22,15 @@ services:
 
   directus:
     image: directus/directus:latest
+    user: "root"  # We starten even als root om de rechten te kunnen wijzigen
+    command: >
+      sh -c "chown -R node:node /directus/uploads && 
+             su node -c 'npx directus start'"
     container_name: directus-app
     ports:
       - '8055:8055'
     volumes:
-      - ./uploads:/directus/uploads
+      - directus-volume:/directus/uploads
       - ./extensions:/directus/extensions
     depends_on:
       database:
@@ -59,3 +63,7 @@ services:
       STORAGE_LOCAL_DRIVER: 'local'
       STORAGE_LOCAL_ROOT: '/directus/uploads'
     restart: always
+
+volumes:
+  directus-volume:
+    external: true
