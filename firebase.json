@@ -35,6 +35,13 @@
         "source": "**",
         "destination": "/index.html"
       }
+    ],
+    "redirects": [
+      {
+        "source": "**",
+        "destination": "https://jason-veer.nl",
+        "type": 301
+      }
     ]
   }
 }
